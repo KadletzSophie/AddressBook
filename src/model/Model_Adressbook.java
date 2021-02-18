@@ -2,8 +2,11 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
+
+/**
+ * @author Sophie Kadletz
+ * @version 18.02.2021
+ */
 
 public class Model_Adressbook {
 
@@ -25,9 +28,9 @@ public class Model_Adressbook {
             Collections.sort(entries);
             currentIndex = entries.indexOf(entry);
         }
-        else{
+        else
             existed = true;
-        }
+
         return existed;
     }
 
@@ -70,6 +73,7 @@ public class Model_Adressbook {
         entries = csv.loadFromFile("Adress.csv");
     }
 
+    //Um zu suchen: mind. einen Wert in Name, Address oder Phone eingeben und auf den Button Search drücken
     public boolean searchEntry(Entry e){
         for (Entry entry:entries) {
             if (e.getName().equals("")){

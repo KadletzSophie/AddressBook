@@ -4,12 +4,17 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
+/**
+ * @author Sophie Kadletz
+ * @version 18.02.2021
+ */
+
 public class CSVReaderWriter {
     public  void saveToFile(String filename, ArrayList<Entry> entries) {
         try {
             FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw);
-            bw.write("Name;Adresse;Telefonnummer");
+            fw.write("Name;Adresse;Telefonnummer"); //In header schreiben
             bw.newLine();
 
             for (Entry entry:entries) {
@@ -36,7 +41,7 @@ public class CSVReaderWriter {
                 entries.add(e);
             }
 
-            Collections.sort(entries);
+            Collections.sort(entries); //ArrayListe sortieren
             reader.close();
         } catch (IOException io) {
             io.printStackTrace();

@@ -9,6 +9,11 @@ import javafx.scene.control.TextField;
 import model.Entry;
 import model.Model_Adressbook;
 
+/**
+ * @author Sophie Kadletz
+ * @version 18.02.2021
+ */
+
 public class Controller {
 
     private Model_Adressbook m;
@@ -47,13 +52,13 @@ public class Controller {
         if (!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
             boolean existed = m.addEntry(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
             if (existed)
-                showAlert("Entry error","Entry already exists!");
-            else{
+                showAlert("Entry error","Eintrag exisiter bereits");
+            else
                 showCurrentEntry();
-            }
+
         }
         else
-            showAlert("Entry error","Notddd");
+            showAlert("Entry error","Alle 3 Felder ausfüllen");
 
     }
 
@@ -99,14 +104,13 @@ public class Controller {
             Entry e = new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText());
             boolean existed = m.searchEntry(e);
             if (existed)
-                showAlert("Entry error","Eintrag exisiter nicht. Ew w");
-            else{
+                showAlert("Entry error","Eintrag exisiter nicht.");
+            else
                 showCurrentEntry();
-            }
+
         }
-        else {
+        else
             showAlert("Entry error","Mind. 1 Feld ausfüllen bitte");
-        }
 
         showCurrentEntry();
     }
@@ -121,7 +125,6 @@ public class Controller {
     private void showCurrentEntry (){
         int index =m.getCurrentIndex();
         int size = m.numbersOfEntries();
-
         Entry e;
 
         if (size > 0){
@@ -138,6 +141,7 @@ public class Controller {
             saveCSV_bt.setDisable(false);
             saveChanges_bt.setDisable(false);
         }
+
         else {
             name_txt.clear();
             address_txt.clear();
@@ -151,19 +155,18 @@ public class Controller {
             saveChanges_bt.setDisable(true);
         }
 
-
-        if (index > 0){
+        if (index > 0)
             pref_bt.setDisable(false);
-        }
-        else{
+
+        else
             pref_bt.setDisable(true);
-        }
-        if (index < m.numbersOfEntries()-1){
+
+        if (index < m.numbersOfEntries()-1)
             next_bt.setDisable(false);
-        }
-        else{
+
+        else
             next_bt.setDisable(true);
-        }
+
 
     }
 

@@ -2,6 +2,11 @@ package model;
 
 import java.util.Objects;
 
+/**
+ * @author Sophie Kadletz
+ * @version 18.02.2021
+ */
+
 public class Entry implements Comparable<Entry> {
     private String name;
     private String address;
@@ -72,6 +77,4 @@ public class Entry implements Comparable<Entry> {
                 ", phone='" + phone + '\'' +
                 '}';
     }
-
-
 }
