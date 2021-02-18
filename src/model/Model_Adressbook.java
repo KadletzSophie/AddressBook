@@ -2,11 +2,20 @@ package model;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
 
 public class Model_Adressbook {
+
     private ArrayList<Entry> entries;
 
     private int currentIndex;
+
+
+    public Model_Adressbook() {
+        this.entries = new ArrayList<>();
+        this.currentIndex = 0;
+    }
 
     public boolean addEntry(Entry entry) {
         boolean existed;
@@ -20,18 +29,6 @@ public class Model_Adressbook {
             existed = true;
         }
         return existed;
-    }
-
-    public void deleteEntry(){
-        entries.remove(currentIndex);
-        if(currentIndex > 0){
-            currentIndex--;
-        }
-    }
-
-    public void saveChanges(Entry e){
-        entries.set(currentIndex,e);
-
     }
 
     public int numbersOfEntries(){
@@ -48,5 +45,50 @@ public class Model_Adressbook {
 
     public void setCurrentIndex(int currentIndex) {
         this.currentIndex = currentIndex;
+    }
+
+    public void deleteEntry(){
+        entries.remove(currentIndex);
+        if(currentIndex > 0){
+            currentIndex--;
+        }
+    }
+
+    public void saveChanges(Entry e){
+        entries.set(currentIndex,e);
+
+    }
+
+    public void saveCSV(){
+        CSVReaderWriter csv = new CSVReaderWriter();
+        csv.saveToFile("Adress.csv",entries);
+    }
+
+    public void loadCSV(){
+        CSVReaderWriter csv = new CSVReaderWriter();
+        currentIndex = 0;
+        entries = csv.loadFromFile("Adress.csv");
+    }
+
+    public boolean searchEntry(Entry e){
+        for (Entry entry:entries) {
+            if (e.getName().equals("")){
+                if (e.getAddress().equals("")){
+                    if(e.getPhone().equals(entry.getPhone())){
+                        currentIndex = entries.indexOf(entry);
+                        return true;
+                    }
+                }
+                else if(e.getAddress().equals(entry.getAddress())) {
+                    currentIndex = entries.indexOf(entry);
+                    return true;
+                }
+            }
+            else if(e.getName().equals(entry.getName())){
+                currentIndex = entries.indexOf(entry);
+                return true;
+            }
+        }
+        return false;
     }
 }

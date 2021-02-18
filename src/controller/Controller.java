@@ -12,7 +12,6 @@ import model.Model_Adressbook;
 public class Controller {
 
     private Model_Adressbook m;
-
     @FXML
     private TextField name_txt;
 
@@ -44,9 +43,6 @@ public class Controller {
     private Label page_lbl;
 
     @FXML
-    private Button searchEntry;
-
-    @FXML
     void AddEntry(ActionEvent event) {
         if (!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
             boolean existed = m.addEntry(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
@@ -61,7 +57,6 @@ public class Controller {
 
     }
 
-
     @FXML
     void DeleteEntry(ActionEvent event) {
         m.deleteEntry();
@@ -70,7 +65,14 @@ public class Controller {
 
     @FXML
     void LoadFromCSV(ActionEvent event) {
+        m.loadCSV();
+        showCurrentEntry();
+    }
 
+    @FXML
+    void SaveToCSV(ActionEvent event) {
+        m.saveCSV();
+        showCurrentEntry();
     }
 
     @FXML
@@ -92,13 +94,21 @@ public class Controller {
     }
 
     @FXML
-    void SaveToCSV(ActionEvent event) {
-
-    }
-
-    @FXML
     void searchEntry(ActionEvent event) {
+        if(!name_txt.getText().isEmpty() || !address_txt.getText().isEmpty() || !phone_txt.getText().isEmpty()){
+            Entry e = new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText());
+            boolean existed = m.searchEntry(e);
+            if (existed)
+                showAlert("Entry error","Eintrag exisiter nicht. Ew w");
+            else{
+                showCurrentEntry();
+            }
+        }
+        else {
+            showAlert("Entry error","Mind. 1 Feld ausfüllen bitte");
+        }
 
+        showCurrentEntry();
     }
 
     private void showAlert(String title, String message) {
