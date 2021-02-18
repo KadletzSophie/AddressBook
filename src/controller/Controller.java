@@ -85,7 +85,8 @@ public class Controller {
 
     @FXML
     void SaveChanges(ActionEvent event) {
-
+        m.saveChanges(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
+        showCurrentEntry();
     }
 
     @FXML

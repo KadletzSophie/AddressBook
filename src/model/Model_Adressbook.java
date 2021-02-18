@@ -29,6 +29,11 @@ public class Model_Adressbook {
         }
     }
 
+    public void saveChanges(Entry e){
+        entries.set(currentIndex,e);
+
+    }
+
     public int numbersOfEntries(){
         return entries.size();
     }
