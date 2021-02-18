@@ -75,12 +75,14 @@ public class Controller {
 
     @FXML
     void NextEntry(ActionEvent event) {
-
+        m.setCurrentIndex(m.getCurrentIndex()+1);
+        showCurrentEntry();
     }
 
     @FXML
     void PrefEntry(ActionEvent event) {
-
+        m.setCurrentIndex(m.getCurrentIndex()-1);
+        showCurrentEntry();
     }
 
     @FXML
