@@ -64,7 +64,8 @@ public class Controller {
 
     @FXML
     void DeleteEntry(ActionEvent event) {
-
+        m.deleteEntry();
+        showCurrentEntry();
     }
 
     @FXML

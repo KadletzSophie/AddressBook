@@ -22,6 +22,13 @@ public class Model_Adressbook {
         return existed;
     }
 
+    public void deleteEntry(){
+        entries.remove(currentIndex);
+        if(currentIndex > 0){
+            currentIndex--;
+        }
+    }
+
     public int numbersOfEntries(){
         return entries.size();
     }
