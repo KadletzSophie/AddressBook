@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Sophie Kadletz
- * @version 18.02.2021
+ * @version 04.03.2021
  */
 
 public class Main extends Application {
@@ -15,7 +15,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("view/sample.fxml"));
-        primaryStage.setTitle("Address Book");
+        primaryStage.setTitle("Address Book final");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
 

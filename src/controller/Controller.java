@@ -6,17 +6,19 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import model.Entry;
 import model.Model_Adressbook;
 
 /**
  * @author Sophie Kadletz
- * @version 18.02.2021
+ * @version 04.03.2021
  */
 
 public class Controller {
 
     private Model_Adressbook m;
+
     @FXML
     private TextField name_txt;
 
@@ -27,22 +29,37 @@ public class Controller {
     private TextField phone_txt;
 
     @FXML
-    private Button pref_bt;
+    private Button add_bt;
 
     @FXML
-    private Button loadCSV_bt;
+    private Button saveCSV_bt;
 
     @FXML
     private Button deleteEntry;
 
     @FXML
+    private Button loadCSV_bt;
+
+    @FXML
     private Button saveChanges_bt;
 
     @FXML
-    private Button next_bt;
+    private TextField name_search_txt;
 
     @FXML
-    private Button saveCSV_bt;
+    private TextField address_search_txt;
+
+    @FXML
+    private TextField phone_search_txt;
+
+    @FXML
+    private Button searchEntry;
+
+    @FXML
+    private Button pref_bt;
+
+    @FXML
+    private Button next_bt;
 
     @FXML
     private Label page_lbl;
@@ -52,7 +69,7 @@ public class Controller {
         if (!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
             boolean existed = m.addEntry(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
             if (existed)
-                showAlert("Entry error","Eintrag exisiter bereits");
+                showAlert("Entry error","Eintrag existiert bereits");
             else
                 showCurrentEntry();
 
@@ -99,20 +116,30 @@ public class Controller {
     }
 
     @FXML
-    void searchEntry(ActionEvent event) {
-        if(!name_txt.getText().isEmpty() || !address_txt.getText().isEmpty() || !phone_txt.getText().isEmpty()){
-            Entry e = new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText());
+    void SearchEntry(ActionEvent event) {
+        if(!name_search_txt.getText().isEmpty() || !address_search_txt.getText().isEmpty() || !phone_search_txt.getText().isEmpty()){
+            Entry e = new Entry(name_search_txt.getText(),address_search_txt.getText(),phone_search_txt.getText());
             boolean existed = m.searchEntry(e);
-            if (existed)
-                showAlert("Entry error","Eintrag exisiter nicht.");
+            name_search_txt.clear();
+            address_search_txt.clear();
+            phone_search_txt.clear();
+            if (!existed)
+                showAlert("Entry error","Eintrag exisitiert nicht.");
             else
                 showCurrentEntry();
 
         }
         else
-            showAlert("Entry error","Mind. 1 Feld ausfüllen bitte");
-
+            showAlert("Entry error","Mind. 1 Feld ausfüllen ");
         showCurrentEntry();
+    }
+
+    @FXML
+    void clear(MouseEvent event) {
+        name_txt.clear();
+        address_txt.clear();
+        phone_txt.clear();
+
     }
 
     private void showAlert(String title, String message) {
@@ -140,6 +167,7 @@ public class Controller {
             pref_bt.setDisable(false);
             saveCSV_bt.setDisable(false);
             saveChanges_bt.setDisable(false);
+            searchEntry.setDisable(false);
         }
 
         else {
@@ -166,14 +194,15 @@ public class Controller {
 
         else
             next_bt.setDisable(true);
-
-
     }
 
     @FXML
     public void initialize (){
         m = new Model_Adressbook();
         page_lbl.setText("0/0");
+        saveChanges_bt.setDisable(true);
+        searchEntry.setDisable(true);
+        saveCSV_bt.setDisable(true);
         deleteEntry.setDisable(true);
         next_bt.setDisable(true);
         pref_bt.setDisable(true);

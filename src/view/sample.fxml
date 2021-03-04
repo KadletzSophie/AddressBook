@@ -4,24 +4,76 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="555.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+<GridPane alignment="center" hgap="10" vgap="10" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller">
+    <columnConstraints>
+        <ColumnConstraints />
+        <ColumnConstraints />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints />
+        <RowConstraints />
+    </rowConstraints>
     <children>
-        <Label layoutX="52.0" layoutY="24.0" text="Name" />
-        <TextField fx:id="name_txt" layoutX="198.0" layoutY="-3.0" prefHeight="70.0" prefWidth="356.0" />
-        <TextField fx:id="address_txt" layoutX="198.0" layoutY="68.0" prefHeight="70.0" prefWidth="356.0" />
-        <TextField fx:id="phone_txt" layoutX="198.0" layoutY="138.0" prefHeight="70.0" prefWidth="356.0" />
-        <Label layoutX="52.0" layoutY="94.0" text="Address" />
-        <Label layoutX="52.0" layoutY="164.0" text="Phone" />
-        <Button fx:id="pref_bt" layoutY="208.0" mnemonicParsing="false" onAction="#PrefEntry" prefHeight="64.0" prefWidth="186.0" text="&lt;&lt;" />
-        <Button layoutY="272.0" mnemonicParsing="false" onAction="#AddEntry" prefHeight="64.0" prefWidth="186.0" text="Add" />
-        <Button fx:id="loadCSV_bt" layoutY="336.0" mnemonicParsing="false" onAction="#LoadFromCSV" prefHeight="64.0" prefWidth="186.0" text="Load from CSV" />
-        <Button fx:id="deleteEntry" layoutX="184.0" layoutY="272.0" mnemonicParsing="false" onAction="#DeleteEntry" prefHeight="64.0" prefWidth="186.0" text="Delete" />
-        <Button fx:id="saveChanges_bt" layoutX="370.0" layoutY="272.0" mnemonicParsing="false" onAction="#SaveChanges" prefHeight="64.0" prefWidth="186.0" text="Save Changes" />
-        <Button fx:id="next_bt" layoutX="370.0" layoutY="208.0" mnemonicParsing="false" onAction="#NextEntry" prefHeight="64.0" prefWidth="186.0" text="&gt;&gt;" />
-        <Button fx:id="saveCSV_bt" layoutX="370.0" layoutY="336.0" mnemonicParsing="false" onAction="#SaveToCSV" prefHeight="64.0" prefWidth="186.0" text="Save to CSV" />
-        <Label fx:id="page_lbl" layoutX="262.0" layoutY="231.0" />
-        <Button fx:id="searchEntry" layoutX="184.0" layoutY="336.0" mnemonicParsing="false" onAction="#searchEntry" prefHeight="64.0" prefWidth="186.0" text="Search" />
+        <AnchorPane prefHeight="404.0" prefWidth="389.0">
+            <children>
+                <GridPane layoutX="11.0" layoutY="14.0" prefHeight="156.0" prefWidth="368.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="218.2000244140625" minWidth="10.0" prefWidth="200.8000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.199951171875" minWidth="10.0" prefWidth="167.9999755859375" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="name_txt"  GridPane.rowIndex="1" />
+                        <TextField fx:id="address_txt" GridPane.rowIndex="3" />
+                        <TextField fx:id="phone_txt" GridPane.rowIndex="5" />
+                        <Label text="Name" />
+                        <Label text="Address" GridPane.rowIndex="2" />
+                        <Label text="Phone" GridPane.rowIndex="4" />
+                        <Button fx:id="add_bt" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#AddEntry" prefHeight="26.0" prefWidth="47.0" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="saveCSV_bt" mnemonicParsing="false" onAction="#SaveToCSV" prefHeight="26.0" prefWidth="178.0" text="Save to CSV" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button fx:id="deleteEntry" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#DeleteEntry" prefHeight="26.0" prefWidth="50.0" text="Delete" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="loadCSV_bt" mnemonicParsing="false" onAction="#LoadFromCSV" prefHeight="26.0" prefWidth="186.0" text="Load from CSV" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <Button fx:id="saveChanges_bt" mnemonicParsing="false" onAction="#SaveChanges" prefHeight="26.0" prefWidth="189.0" text="Save Changes" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                    </children>
+                </GridPane>
+                <GridPane layoutX="11.0" layoutY="233.0" prefHeight="156.0" prefWidth="368.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="201.5999755859375" minWidth="10.0" prefWidth="200.8000244140625" />
+                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="179.199951171875" minWidth="10.0" prefWidth="166.4000244140625" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextField fx:id="name_search_txt" onMouseClicked="#clear" GridPane.rowIndex="1" />
+                        <TextField fx:id="address_search_txt" onMouseClicked="#clear" GridPane.rowIndex="3" />
+                        <TextField fx:id="phone_search_txt" onMouseClicked="#clear" GridPane.rowIndex="5" />
+                        <Label text="Name" />
+                        <Label text="Address" GridPane.rowIndex="2" />
+                        <Label text="Phone" GridPane.rowIndex="4" />
+                        <Button fx:id="searchEntry" mnemonicParsing="false" onAction="#SearchEntry" prefHeight="26.0" prefWidth="221.0" text="Search" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                    </children>
+                </GridPane>
+                <Button fx:id="pref_bt" layoutX="11.0" layoutY="179.0" mnemonicParsing="false" onAction="#PrefEntry" text="&lt;&lt;" />
+                <Button fx:id="next_bt" layoutX="91.0" layoutY="179.0" mnemonicParsing="false" onAction="#NextEntry" text="&gt;&gt;" />
+                <Label fx:id="page_lbl" layoutX="59.0" layoutY="183.0" />
+            </children>
+        </AnchorPane>
     </children>
-</AnchorPane>
+</GridPane>

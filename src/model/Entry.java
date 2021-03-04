@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * @author Sophie Kadletz
- * @version 18.02.2021
+ * @version 04.03.2021
  */
 
 public class Entry implements Comparable<Entry> {

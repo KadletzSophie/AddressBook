@@ -6,7 +6,7 @@ import java.util.Collections;
 
 /**
  * @author Sophie Kadletz
- * @version 18.02.2021
+ * @version 04.03.2021
  */
 
 public class CSVReaderWriter {
@@ -31,10 +31,11 @@ public class CSVReaderWriter {
 
     public ArrayList<Entry> loadFromFile(String filename) {
         ArrayList<Entry> entries = new ArrayList<>();
-        String[] strar = new String[3];
+        String[] strar;
         String line;
         try {
             BufferedReader reader =new BufferedReader(new FileReader(filename));
+            reader.readLine();
             while ((line = reader.readLine()) != null) {
                 strar = line.split(";");
                 Entry e = new Entry(strar[0],strar[1],strar[2]);

@@ -5,7 +5,7 @@ import java.util.Collections;
 
 /**
  * @author Sophie Kadletz
- * @version 18.02.2021
+ * @version 04.03.2021
  */
 
 public class Model_Adressbook {
@@ -13,6 +13,8 @@ public class Model_Adressbook {
     private ArrayList<Entry> entries;
 
     private int currentIndex;
+
+
 
 
     public Model_Adressbook() {
@@ -58,7 +60,8 @@ public class Model_Adressbook {
     }
 
     public void saveChanges(Entry e){
-        entries.set(currentIndex,e);
+        //String line = "\n"+name+";"+address+";"+number+";";
+        entries.set(currentIndex, e);
 
     }
 
@@ -73,7 +76,6 @@ public class Model_Adressbook {
         entries = csv.loadFromFile("Adress.csv");
     }
 
-    //Um zu suchen: mind. einen Wert in Name, Address oder Phone eingeben und auf den Button Search drücken
     public boolean searchEntry(Entry e){
         for (Entry entry:entries) {
             if (e.getName().equals("")){
