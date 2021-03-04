@@ -45,7 +45,7 @@ public class CSVReaderWriter {
             Collections.sort(entries); //ArrayListe sortieren
             reader.close();
         } catch (IOException io) {
-            io.printStackTrace();
+            return null;
         }
         return entries;
     }

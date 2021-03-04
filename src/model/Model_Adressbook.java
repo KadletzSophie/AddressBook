@@ -11,10 +11,7 @@ import java.util.Collections;
 public class Model_Adressbook {
 
     private ArrayList<Entry> entries;
-
     private int currentIndex;
-
-
 
 
     public Model_Adressbook() {
@@ -70,10 +67,17 @@ public class Model_Adressbook {
         csv.saveToFile("Adress.csv",entries);
     }
 
-    public void loadCSV(){
+    public boolean loadCSV(){
         CSVReaderWriter csv = new CSVReaderWriter();
         currentIndex = 0;
         entries = csv.loadFromFile("Adress.csv");
+        if (entries == null) {
+            entries = new ArrayList<>();
+            return false;
+        }
+        else
+            return true;
+
     }
 
     public boolean searchEntry(Entry e){

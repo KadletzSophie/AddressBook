@@ -87,8 +87,13 @@ public class Controller {
 
     @FXML
     void LoadFromCSV(ActionEvent event) {
-        m.loadCSV();
-        showCurrentEntry();
+        if (m.loadCSV()){
+            m.loadCSV();
+            showCurrentEntry();
+        }
+        else
+            showAlert("Fehler","Keine CSV-File");
+
     }
 
     @FXML
@@ -111,8 +116,11 @@ public class Controller {
 
     @FXML
     void SaveChanges(ActionEvent event) {
+        if(!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
         m.saveChanges(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
-        showCurrentEntry();
+        showCurrentEntry();}
+        else
+            showAlert("Entry error","Alle Felder ausfüllen");
     }
 
     @FXML
@@ -207,5 +215,4 @@ public class Controller {
         next_bt.setDisable(true);
         pref_bt.setDisable(true);
     }
-
 }
