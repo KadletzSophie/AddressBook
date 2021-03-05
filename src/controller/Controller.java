@@ -24,7 +24,7 @@ public class Controller {
     }
 
     @FXML
-    private TextField name_txt;
+    private TextField vorname_txt;
 
     @FXML
     private TextField address_txt;
@@ -48,7 +48,7 @@ public class Controller {
     private Button saveChanges_bt;
 
     @FXML
-    private TextField name_search_txt;
+    private TextField vorname_search_txt;
 
     @FXML
     private TextField address_search_txt;
@@ -69,17 +69,24 @@ public class Controller {
     private Label page_lbl;
 
     @FXML
-    void AddEntry(ActionEvent event) {
-        if (!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
-            boolean existed = m.addEntry(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
-            if (existed)
-                showAlert("Entry error","Eintrag existiert bereits");
-            else
-                showCurrentEntry();
+    private TextField nachname_search_txt;
 
+    @FXML
+    private TextField nachname_txt;
+
+    @FXML
+    void AddEntry(ActionEvent event) {
+        if (!vorname_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty() && !nachname_txt.getText().isEmpty() && isText(vorname_txt.getText(),nachname_txt.getText())){
+            boolean existed = m.addEntry(new Entry(vorname_txt.getText(), nachname_txt.getText(), address_txt.getText(), phone_txt.getText()));
+                if (existed)
+                    showAlert("Entry error", "Eintrag existiert bereits");
+                else
+                    showCurrentEntry();
         }
+        else if (!isText(vorname_txt.getText(),nachname_txt.getText()))
+            showAlert("Entry error","Auf richtigen Eintrag achten! \nKeine Zahlen oder Sonderzeichen in Vor- und Nachname");
         else
-            showAlert("Entry error","Alle 3 Felder ausfüllen");
+            showAlert("Entry error","Alle Felder ausfüllen");
 
     }
 
@@ -120,8 +127,8 @@ public class Controller {
 
     @FXML
     void SaveChanges(ActionEvent event) {
-        if(!name_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty()){
-        m.saveChanges(new Entry(name_txt.getText(),address_txt.getText(),phone_txt.getText()));
+        if(!vorname_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty() && !nachname_txt.getText().isEmpty()){
+        m.saveChanges(new Entry(vorname_txt.getText(),nachname_txt.getText(), address_txt.getText(),phone_txt.getText()));
         showCurrentEntry();}
         else
             showAlert("Entry error","Alle Felder ausfüllen");
@@ -129,10 +136,11 @@ public class Controller {
 
     @FXML
     void SearchEntry(ActionEvent event) {
-        if(!name_search_txt.getText().isEmpty() || !address_search_txt.getText().isEmpty() || !phone_search_txt.getText().isEmpty()){
-            Entry e = new Entry(name_search_txt.getText(),address_search_txt.getText(),phone_search_txt.getText());
+        if(!vorname_search_txt.getText().isEmpty() || !address_search_txt.getText().isEmpty() || !phone_search_txt.getText().isEmpty() || !nachname_search_txt.getText().isEmpty()){
+            Entry e = new Entry(vorname_search_txt.getText(),nachname_search_txt.getText(), address_search_txt.getText(),phone_search_txt.getText());
             boolean existed = m.searchEntry(e);
-            name_search_txt.clear();
+            vorname_search_txt.clear();
+            nachname_search_txt.clear();
             address_search_txt.clear();
             phone_search_txt.clear();
             if (!existed)
@@ -148,10 +156,21 @@ public class Controller {
 
     @FXML
     void clear(MouseEvent event) {
-        name_txt.clear();
+        vorname_txt.clear();
+        nachname_txt.clear();
         address_txt.clear();
         phone_txt.clear();
 
+    }
+
+    /*private boolean isNumeric() {
+        return vorname_txt.getText().matches("[A-Za-z]") || vorname_txt.getText().equals("");
+    }*/
+
+    private boolean isText(String v,String n) {
+        boolean b = v.matches("\\p{L}*")&&n.matches("\\p{L}*");
+        System.out.println(b);
+        return v.matches("\\p{L}*")&&n.matches("\\p{L}*");
     }
 
     private void showAlert(String title, String message) {
@@ -169,7 +188,8 @@ public class Controller {
         if (size > 0){
             e = m.getEntryViaIndex(m.getCurrentIndex());
 
-            name_txt.setText(e.getName());
+            vorname_txt.setText(e.getVorname());
+            nachname_txt.setText(e.getNachname());
             address_txt.setText(e.getAddress());
             phone_txt.setText(e.getPhone());
             page_lbl.setText((index+1)+"/"+size);
@@ -183,7 +203,8 @@ public class Controller {
         }
 
         else {
-            name_txt.clear();
+            vorname_txt.clear();
+            nachname_txt.clear();
             address_txt.clear();
             phone_txt.clear();
             page_lbl.setText("0/0");

@@ -8,23 +8,33 @@ import java.util.Objects;
  */
 
 public class Entry implements Comparable<Entry> {
-    private String name;
+    private String vorname;
+    private String nachname;
     private String address;
     private String phone;
 
-    public Entry(String name, String address, String phone) {
-        this.name = name;
+    public Entry(String vorname, String nachname, String address, String phone) {
+        this.vorname = vorname;
+        this.nachname = nachname;
         this.address = address;
         this.phone = phone;
     }
 
 
-    public String getName() {
-        return name;
+    public String getVorname() {
+        return vorname;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setVorname(String vorname) {
+        this.vorname = vorname;
+    }
+
+    public String getNachname() {
+        return nachname;
+    }
+
+    public void setNachname(String nachname) {
+        this.nachname = nachname;
     }
 
     public String getAddress() {
@@ -48,23 +58,26 @@ public class Entry implements Comparable<Entry> {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Entry entry = (Entry) o;
-        return name.equals(entry.name) &&
+        return vorname.equals(entry.vorname) &&
+                nachname.equals(entry.nachname)&&
                 address.equals(entry.address) &&
                 phone.equals(entry.phone);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, address, phone);
+        return Objects.hash(vorname, nachname, address, phone);
     }
 
     @Override
     public int compareTo(Entry o) {
         int result;
-        if ((result = this.name.compareTo(o.getName())) == 0){
-            if ((result = this.phone.compareTo(o.getPhone())) == 0) {
-                return this.address.compareTo(o.getAddress());
+        if ((result = this.vorname.compareTo(o.getVorname())) == 0){
+            if ((result = this.nachname.compareTo(o.getNachname())) == 0) {
+                if ((result = this.phone.compareTo(o.getPhone())) == 0)
+                    return this.address.compareTo(o.getAddress());
             }
+
         }
         return result;
     }
@@ -72,7 +85,8 @@ public class Entry implements Comparable<Entry> {
     @Override
     public String toString() {
         return "Entry{" +
-                "name='" + name + '\'' +
+                "vorname='" + vorname + '\'' +
+                ", nachname='" + nachname + '\'' +
                 ", address='" + address + '\'' +
                 ", phone='" + phone + '\'' +
                 '}';

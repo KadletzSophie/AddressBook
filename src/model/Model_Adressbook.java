@@ -82,7 +82,7 @@ public class Model_Adressbook {
 
     public boolean searchEntry(Entry e){
         for (Entry entry:entries) {
-            if (e.getName().equals("")){
+            if (e.getVorname().equals("")){
                 if (e.getAddress().equals("")){
                     if(e.getPhone().equals(entry.getPhone())){
                         currentIndex = entries.indexOf(entry);
@@ -94,7 +94,7 @@ public class Model_Adressbook {
                     return true;
                 }
             }
-            else if(e.getName().equals(entry.getName())){
+            else if(e.getVorname().equals(entry.getVorname())){
                 currentIndex = entries.indexOf(entry);
                 return true;
             }

@@ -14,12 +14,12 @@ public class CSVReaderWriter {
         try {
             FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw);
-            fw.write("Name;Adresse;Telefonnummer");
+            fw.write("Vorname;Nachname;Adresse;Telefonnummer");
             bw.newLine();
             System.out.println(entries.size());
             for (Entry entry:entries) {
                 System.out.println(entry.toString());
-                bw.write(entry.getName()+";"+entry.getAddress()+";"+entry.getPhone()+";");
+                bw.write(entry.getVorname()+";"+entry.getNachname() + ";"+entry.getAddress()+";"+entry.getPhone()+";");
                 bw.newLine();
             }
             bw.close();
@@ -38,7 +38,7 @@ public class CSVReaderWriter {
             reader.readLine();
             while ((line = reader.readLine()) != null) {
                 strar = line.split(";");
-                Entry e = new Entry(strar[0],strar[1],strar[2]);
+                Entry e = new Entry(strar[0],strar[1],strar[2],strar[3]);
                 entries.add(e);
             }
 
