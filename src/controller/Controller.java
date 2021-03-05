@@ -12,12 +12,16 @@ import model.Model_Adressbook;
 
 /**
  * @author Sophie Kadletz
- * @version 04.03.2021
+ * @version 05.03.2021
  */
 
 public class Controller {
 
     private Model_Adressbook m;
+
+    public Model_Adressbook getM() {
+        return m;
+    }
 
     @FXML
     private TextField name_txt;
@@ -97,7 +101,7 @@ public class Controller {
     }
 
     @FXML
-    void SaveToCSV(ActionEvent event) {
+    public void SaveToCSV(ActionEvent event) {
         m.saveCSV();
         showCurrentEntry();
     }
@@ -214,5 +218,7 @@ public class Controller {
         deleteEntry.setDisable(true);
         next_bt.setDisable(true);
         pref_bt.setDisable(true);
+        m.loadCSV();
+        showCurrentEntry();
     }
 }

@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  * @author Sophie Kadletz
- * @version 04.03.2021
+ * @version 05.03.2021
  */
 
 public class Main extends Application {
@@ -18,7 +18,6 @@ public class Main extends Application {
         primaryStage.setTitle("Address Book final");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
-
     }
 
     public static void main(String[] args) {

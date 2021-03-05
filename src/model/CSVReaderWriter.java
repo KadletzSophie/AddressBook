@@ -6,7 +6,7 @@ import java.util.Collections;
 
 /**
  * @author Sophie Kadletz
- * @version 04.03.2021
+ * @version 05.03.2021
  */
 
 public class CSVReaderWriter {
@@ -14,9 +14,9 @@ public class CSVReaderWriter {
         try {
             FileWriter fw = new FileWriter(filename);
             BufferedWriter bw = new BufferedWriter(fw);
-            fw.write("Name;Adresse;Telefonnummer"); //In header schreiben
+            fw.write("Name;Adresse;Telefonnummer");
             bw.newLine();
-
+            System.out.println(entries.size());
             for (Entry entry:entries) {
                 System.out.println(entry.toString());
                 bw.write(entry.getName()+";"+entry.getAddress()+";"+entry.getPhone()+";");
