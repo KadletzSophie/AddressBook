@@ -12,7 +12,7 @@ import model.Model_Adressbook;
 
 /**
  * @author Sophie Kadletz
- * @version 05.03.2021
+ * @version 07.03.2021
  */
 
 public class Controller {
@@ -76,7 +76,7 @@ public class Controller {
 
     @FXML
     void AddEntry(ActionEvent event) {
-        if (!vorname_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty() && !nachname_txt.getText().isEmpty() && isText(vorname_txt.getText(),nachname_txt.getText()) && isNumeric(phone_txt.getText())){
+        if (!vorname_txt.getText().isEmpty() && !address_txt.getText().isEmpty() && !phone_txt.getText().isEmpty() && !nachname_txt.getText().isEmpty() && isText(vorname_txt.getText(),nachname_txt.getText()) && isNumeric(phone_txt.getText()) && isAddress(address_txt.getText())){
             boolean existed = m.addEntry(new Entry(vorname_txt.getText(), nachname_txt.getText(), address_txt.getText(), phone_txt.getText()));
                 if (existed)
                     showAlert("Entry error", "Eintrag existiert bereits");
@@ -86,7 +86,9 @@ public class Controller {
         else if (!isText(vorname_txt.getText(),nachname_txt.getText()))
             showAlert("Entry error","Auf richtigen Eintrag achten! \nKeine Zahlen oder Sonderzeichen in Vor- und Nachname");
         else if (!isNumeric(phone_txt.getText()))
-            showAlert("ENtry error","Auf richtigen Eintrag achten! \nGültige Telefonnummer z.B:  06442/3893023, +43 221 549144 \nNur Österreichische Nummern möglich ");
+            showAlert("Entry error","Auf richtigen Eintrag achten! \nGültige Telefonnummer z.B:  06442/3893023, +43 221 549144 \nNur Österreichische Nummern möglich ");
+        else if(!isAddress(address_txt.getText()))
+            showAlert("Entry error","Auf richtigen Eintrag achten! \nGültige Adresse z.B: Übungstraße 7 4650 Steinerkirchen, Obere Feldstraße 20 4653 Eberstallzell");
         else
             showAlert("Entry error","Alle Felder ausfüllen");
 
@@ -165,38 +167,6 @@ public class Controller {
 
     }
 
-    private boolean isNumeric(String phone) {
-        System.out.println(phone.matches("[0-9]*\\/*(\\+43)*[ ]*(\\([0-9]+\\))*([ ]*(-|–)*[ ]*[0-9]+)*"));
-        return phone.matches("[0-9]*\\/*(\\+43)*[ ]*(\\([0-9]+\\))*([ ]*(-|–)*[ ]*[0-9]+)*");
-        /*
-        valid Formats:
-        (06442) 3933023
-        (02852) 5996-0
-        (042) 1818 87 9919
-        06442 / 3893023
-        06442 / 38 93 02 3
-        06442/3839023
-        042/ 88 17 890 0
-        +43 221 549144 – 79
-        +43 221 - 542194 79
-        +43 (221) - 542944 79
-        0 52 22 - 9 50 93 10
-        +43(0)121-79536 - 77
-        +43(0)2221-39938-113
-        +43 (0) 1739 906-44
-        +43 (173) 1799 806-44
-        0173173990644
-        0214154914479
-        02141 54 91 44 79
-        01517953677
-        +431517953677
-        015777953677
-        02162 - 54 91 44 79
-        (02162) 54 91 44 79
-         */
-    }
-
-
 
     private void showAlert(String title, String message) {
         Alert a = new Alert(Alert.AlertType.ERROR);
@@ -255,9 +225,51 @@ public class Controller {
     }
 
     private boolean isText(String v,String n) {
-        boolean b = v.matches("\\p{L}*")&&n.matches("\\p{L}*");
+        //boolean b = v.matches("\\p{L}*")&&n.matches("\\p{L}*");
         //System.out.println(b);
         return v.matches("\\p{L}*")&&n.matches("\\p{L}*");
+    }
+
+    private boolean isNumeric(String phone) {
+        //System.out.println(phone.matches("[0-9]*\\/*(\\+43)*[ ]*(\\([0-9]+\\))*([ ]*(-|–)*[ ]*[0-9]+)*"));
+        return phone.matches("[0-9]*\\/*(\\+43)*[ ]*(\\([0-9]+\\))*([ ]*(-|–)*[ ]*[0-9]+)*");
+        /*
+        valid Formats:
+        (06442) 3933023
+        (02852) 5996-0
+        (042) 1818 87 9919
+        06442 / 3893023
+        06442 / 38 93 02 3
+        06442/3839023
+        042/ 88 17 890 0
+        +43 221 549144 – 79
+        +43 221 - 542194 79
+        +43 (221) - 542944 79
+        0 52 22 - 9 50 93 10
+        +43(0)121-79536 - 77
+        +43(0)2221-39938-113
+        +43 (0) 1739 906-44
+        +43 (173) 1799 806-44
+        0173173990644
+        0214154914479
+        02141 54 91 44 79
+        01517953677
+        +431517953677
+        015777953677
+        02162 - 54 91 44 79
+        (02162) 54 91 44 79
+         */
+    }
+
+    private boolean isAddress (String address){
+        //System.out.println(address.matches("^([a-zA-ZüäößÜÖÄ\\s]+\\s)([0-9]+\\s)([0-9]{4}\\s)([a-zA-ZüäößÜÖÄ\\s]+)$"));
+        return address.matches("^([a-zA-ZüäößÜÖÄ\\s]+\\s)([0-9]+\\s)([0-9]{4}\\s)([a-zA-ZüäößÜÖÄ\\s]+)$");
+        /*
+        valid Formats:
+        Übungstraße 7 4650 Stinerkirchen
+        Obere Feldstraße 20 4653 Eberstallzell
+        Unterer Hautplatz 1 4910 Ried im Innkreis
+         */
     }
 
     @FXML
